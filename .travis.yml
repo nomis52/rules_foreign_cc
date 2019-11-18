@@ -16,6 +16,7 @@ addons:
       - wget
       - pkg-config
   homebrew:
+    update: true
     packages:
       - bazel
 
