@@ -1,0 +1,16 @@
+language: cpp
+
+script:
+   - "bash -ex travis-ci.sh"
+
+before_install:
+  - sudo apt-get -y install bazel
+
+addons:
+  apt:
+    update: true
+
+matrix:
+  include:
+    - os: linux
+      dist: xenial
