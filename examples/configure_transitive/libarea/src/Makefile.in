@@ -134,6 +134,9 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+libarea_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(libarea_la_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -316,6 +319,7 @@ top_srcdir = @top_srcdir@
 lib_LTLIBRARIES = libarea.la
 libarea_la_SOURCES = area.c
 libarea_la_CPPFLAGS = -I$(top_srcdir)/include
+libarea_la_LDFLAGS = @LENGTH_LIBS@
 all: all-am
 
 .SUFFIXES:
@@ -386,7 +390,7 @@ clean-libLTLIBRARIES:
 	}
 
 libarea.la: $(libarea_la_OBJECTS) $(libarea_la_DEPENDENCIES) $(EXTRA_libarea_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK) -rpath $(libdir) $(libarea_la_OBJECTS) $(libarea_la_LIBADD) $(LIBS)
+	$(AM_V_CCLD)$(libarea_la_LINK) -rpath $(libdir) $(libarea_la_OBJECTS) $(libarea_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -647,7 +651,6 @@ uninstall-am: uninstall-libLTLIBRARIES
 
 .PRECIOUS: Makefile
 
-#libarea_la_LDFLAGS = @LENGTH_LIBS@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
