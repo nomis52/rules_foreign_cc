@@ -15,8 +15,13 @@ addons:
     packages:
       - wget
       - pkg-config
+  homebrew:
+    packages:
+      - bazel
 
 matrix:
   include:
     - os: linux
       dist: xenial
+    - os: osx
+      compiler: clang

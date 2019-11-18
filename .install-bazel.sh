@@ -4,10 +4,16 @@
 
 set -e
 
-release=$(curl -sL https://api.github.com/repos/bazelbuild/bazel/releases/latest | jq -r '.assets[].browser_download_url'| grep '.deb$')
-deb=$(dirname $release)
-wget "$release"
-wget "$release.sha256"
+if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
+  curl -L https://api.github.com/repos/bazelbuild/bazel/releases/latest
+  cat latest
+  release=$(curl -sL https://api.github.com/repos/bazelbuild/bazel/releases/latest | jq -r '.assets[].browser_download_url'| grep '.deb$')
+  deb=$(dirname $release)
+  wget "$release"
+  wget "$release.sha256"
 
-sha256sum -c "$deb.sha256"
-sudo dpkg -i "$deb"
+  sha256sum -c "$deb.sha256"
+  sudo dpkg -i "$deb"
+fi
+
+# OS X is handled in .travis-ci.yml
