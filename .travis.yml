@@ -6,9 +6,15 @@ script:
 before_install:
   - sudo apt-get -y install bazel
 
+before_install:
+   - "bash -ex .install-bazel.sh"
+
 addons:
   apt:
     update: true
+    packages:
+      - wget
+      - pkg-config
 
 matrix:
   include:
