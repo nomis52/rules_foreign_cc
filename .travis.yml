@@ -1,0 +1,28 @@
+language: cpp
+
+script:
+   - "bash -ex travis-ci.sh"
+
+before_install:
+  - sudo apt-get -y install bazel
+
+before_install:
+   - "bash -ex .install-bazel.sh"
+
+addons:
+  apt:
+    update: true
+    packages:
+      - wget
+      - pkg-config
+  homebrew:
+    update: true
+    taps: bazelbuild/tap
+    packages: bazelbuild/tap/bazel
+
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+    - os: osx
+      compiler: clang
