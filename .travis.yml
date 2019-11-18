@@ -16,9 +16,8 @@ addons:
       - wget
       - pkg-config
   homebrew:
-    update: true
-    packages:
-      - bazel
+    taps: bazelbuild/tap
+    casks: bazelbuild/tap/bazel
 
 matrix:
   include:

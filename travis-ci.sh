@@ -16,5 +16,5 @@ cd examples
 for example in "${tests[@]}"; do
   pushd .
   bazel test "//$example/..."
-  popd .
+  popd
 done
