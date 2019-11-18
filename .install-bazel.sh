@@ -6,7 +6,6 @@ set -e
 
 if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   jq --version
-  curl -L https://api.github.com/repos/bazelbuild/bazel/releases/latest
   release=$(curl -sL https://api.github.com/repos/bazelbuild/bazel/releases/latest | jq -r '.assets[].browser_download_url'| grep '.deb$')
   deb=$(echo ${release##*/})
   wget "$release"
