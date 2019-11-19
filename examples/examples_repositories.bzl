@@ -157,3 +157,24 @@ def include_examples_repositories():
         urls = ["https://github.com/jameskbride/cmake-hello-world/archive/master.zip"],
         sha256 = "d613cf222bbb05b8cff7a1c03c37345ed33744a4ebaf3a8bfd5f56a76e25ca08",
     )
+
+    http_archive(
+        name = "liblength",
+        build_file_content = all_content,
+        strip_prefix = "liblength-1.0.0",
+        urls = ["file:///tmp/liblength-1.0.0.tar.gz"],
+    )
+
+    http_archive(
+        name = "libarea",
+        build_file_content = all_content,
+        strip_prefix = "libarea-1.0.0",
+        urls = ["file:///tmp/libarea-1.0.0.tar.gz"],
+    )
+
+    http_archive(
+        name = "libvolume",
+        build_file_content = all_content,
+        strip_prefix = "libvolume-1.0.0",
+        urls = ["file:///tmp/libvolume-1.0.0.tar.gz"],
+    )

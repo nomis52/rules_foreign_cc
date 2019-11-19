@@ -4,6 +4,7 @@ AC_INIT([libarea], [1.0])
 
 AC_CONFIG_SRCDIR([include/area.h])
 AC_CONFIG_AUX_DIR([config])
+#AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE
@@ -22,7 +23,7 @@ AC_CHECK_HEADERS([stdint.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
-# Checks for library functions.
+ Checks for library functions.
 AC_CHECK_LIB([length], [length], [have_length=yes], [have_length=no])
 if test "x${have_length}" = "xno"; then
    AC_MSG_ERROR([liblength required to build libvolume])
