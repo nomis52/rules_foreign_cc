@@ -161,20 +161,20 @@ def include_examples_repositories():
     http_archive(
         name = "liblength",
         build_file_content = all_content,
-        strip_prefix = "liblength-1.0.0",
-        urls = ["file:///tmp/liblength-1.0.0.tar.gz"],
+        strip_prefix = "liblength-1.0",
+        urls = ["file:///tmp/liblength-1.0.tar.gz"],
     )
 
     http_archive(
         name = "libarea",
         build_file_content = all_content,
-        strip_prefix = "libarea-1.0.0",
-        urls = ["file:///tmp/libarea-1.0.0.tar.gz"],
+        strip_prefix = "libarea-1.0",
+        urls = ["file:///tmp/libarea-1.0.tar.gz"],
     )
 
     http_archive(
         name = "libvolume",
         build_file_content = all_content,
-        strip_prefix = "libvolume-1.0.0",
-        urls = ["file:///tmp/libvolume-1.0.0.tar.gz"],
+        strip_prefix = "libvolume-1.0",
+        urls = ["file:///tmp/libvolume-1.0.tar.gz"],
     )

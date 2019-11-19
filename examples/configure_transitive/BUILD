@@ -6,7 +6,7 @@ configure_make(
       "--disable-shared",
       "--enable-static",
     ],
-    lib_source = "//configure_transitive/liblength:all",
+    lib_source = "@liblength//:all",
     static_libraries = ["liblength.a"],
     # https://github.com/bazelbuild/rules_foreign_cc/pull/315
     configure_env_vars = {
@@ -21,7 +21,7 @@ configure_make(
       "--disable-shared",
       "--enable-static",
     ],
-    lib_source = "//configure_transitive/libarea:all",
+    lib_source = "@libarea//:all",
     static_libraries = ["libarea.a"],
     deps = [
         "//configure_transitive:liblength",
@@ -39,7 +39,7 @@ configure_make(
       "--disable-shared",
       "--enable-static",
     ],
-    lib_source = "//configure_transitive/libvolume:all",
+    lib_source = "@libvolume//:all",
     static_libraries = ["libvolume.a"],
     # https://github.com/bazelbuild/rules_foreign_cc/pull/315
     configure_env_vars = {
