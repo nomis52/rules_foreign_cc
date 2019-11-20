@@ -21,15 +21,29 @@ AC_PROG_LIBTOOL
 AC_CHECK_HEADERS([stdint.h])
 
 # Checks for libraries.
-AC_CHECK_LIB([area], [area], [have_area=yes], [have_area=no])
-if test "x${have_area}" = "xno"; then
-   AC_MSG_ERROR([libarea required to build libvolume])
+AC_ARG_WITH([libarea],
+            AC_HELP_STRING([--without-libarea], [skip check for libarea]),
+             [ case "$withval" in
+             no)  ac_with_area=no ;;
+             yes) ac_with_area=yes ;;
+             *)   ac_with_area=yes ;;
+           esac
+           ])
+
+AREA_LIBS=
+if test x"${ac_with_area}" = xyes; then
+  AC_MSG_CHECKING([for libarea support])
+  AC_CHECK_LIB([area], [area], [have_area=yes], [have_area=no])
+  if test "x${have_area}" = "xno"; then
+     AC_MSG_ERROR([libarea required to build libvolume])
+  fi
+  AC_CHECK_HEADERS([area.h], [have_area_header=yes], [have_area_header=no])
+  if test "x${have_area_header}" = "xno"; then
+     AC_MSG_ERROR([area.h not found])
+  fi
+  AC_MSG_RESULT([yes])
+  AREA_LIBS=-larea
 fi
-AC_CHECK_HEADERS([area.h], [have_area_header=yes], [have_area_header=no])
-if test "x${have_area_header}" = "xno"; then
-   AC_MSG_ERROR([area.h not found])
-fi
-AREA_LIBS=-larea
 AC_SUBST(AREA_LIBS)
 
 AC_CONFIG_FILES([Makefile include/Makefile src/Makefile])

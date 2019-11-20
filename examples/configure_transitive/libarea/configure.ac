@@ -23,16 +23,29 @@ AC_CHECK_HEADERS([stdint.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
- Checks for library functions.
-AC_CHECK_LIB([length], [length], [have_length=yes], [have_length=no])
-if test "x${have_length}" = "xno"; then
-   AC_MSG_ERROR([liblength required to build libvolume])
+AC_ARG_WITH([liblength],
+            AC_HELP_STRING([--without-liblength], [skip check for liblength]),
+             [ case "$withval" in
+             no)  ac_with_length=no ;;
+             yes) ac_with_length=yes ;;
+             *)   ac_with_length=yes ;;
+           esac
+           ])
+
+LENGTH_LIBS=
+if test x"${ac_with_length}" = xyes; then
+  AC_MSG_CHECKING([for liblength support])
+  AC_CHECK_LIB([length], [length], [have_length=yes], [have_length=no])
+  if test "x${have_length}" = "xno"; then
+     AC_MSG_ERROR([liblength required to build libvolume])
+  fi
+  AC_CHECK_HEADERS([length.h], [have_length_header=yes], [have_length_header=no])
+  if test "x${have_length_header}" = "xno"; then
+     AC_MSG_ERROR([length.h not found])
+  fi
+  AC_MSG_RESULT([yes])
+  LENGTH_LIBS=-llength
 fi
-AC_CHECK_HEADERS([length.h], [have_length_header=yes], [have_length_header=no])
-if test "x${have_length_header}" = "xno"; then
-   AC_MSG_ERROR([length.h not found])
-fi
-LENGTH_LIBS=-llength
 AC_SUBST(LENGTH_LIBS)
 
 AC_CONFIG_FILES([Makefile include/Makefile src/Makefile])
